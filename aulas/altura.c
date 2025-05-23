@@ -15,7 +15,7 @@ int main()
 
     polegadas = pes * POL_POR_PE + polegadas;
     metros = polegadas * CM_POR_POL / 100;
-    printf("Altura em metros: %.2f/n", metros);
+    printf("Altura em metros: %.2f\n", metros);
     // Fim
     return 0;
 }
