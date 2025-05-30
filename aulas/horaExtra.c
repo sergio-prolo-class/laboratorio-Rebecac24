@@ -12,7 +12,7 @@ int main()
         pag += 25 * (hrs - 8);
         // Se então
     }
-    printf("Pagamento: %.2f\n, pag");
+    printf("Pagamento: R$ %.2f\n", pag);
     // Fim
     return 0;
 }
