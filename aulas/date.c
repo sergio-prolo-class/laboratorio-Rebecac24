@@ -1,42 +1,49 @@
 #include <stdio.h>
-#include <string.h>
 
 int main()
 {
     int day, month, year;
-    char *months = 12;
-    {
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"};
-    printf("escreva a data no formato dd/mm/aaaa: ")
-        scanf("%d/%d/%d", &day, &month, &year);
-    if (day >= 1 && day <= 31)
-        switch (day % 10) {
-            case 1:
-                if (day != 11)
-                    strcpy "st";
-                break;
-            case 2:
-                if (day != 12)
-                    strcpy "nd";
-                break;
-            case 3:
-                if (day != 13)
-                    strcpy "rd";
-                break;
-        }
-    if (month < 1 || month > 12) {
-        printf("mes inválido\n");
-        return 1;
+
+    printf("Enter date (dd/mm/yyyy): ");
+    scanf("%d/%d/%d", &day, &month, &year);
+
+    switch (month) {
+        case 1: printf("January"); break;
+        case 2: printf("February"); break;
+        case 3: printf("March"); break;
+        case 4: printf("April"); break;
+        case 5: printf("May"); break;
+        case 6: printf("June"); break;
+        case 7: printf("July"); break;
+        case 8: printf("August"); break;
+        case 9: printf("September"); break;
+        case 10: printf("October"); break;
+        case 11: printf("November"); break;
+        case 12: printf("December"); break;
     }
-    if (day < 1 || day > 31) {
-        printf("dia inválido\n");
-        return 1;
+
+    printf(" %d", day);
+
+    switch (day) {
+        case 1:
+        case 21:
+        case 31:
+            printf("st");
+            break;
+        case 2:
+        case 22:
+            printf("nd");
+            break;
+        case 3:
+        case 23:
+            printf("rd");
+            break;
+        default:
+            printf("th");
+            break;
     }
-    if (year < 0) {
-        printf("ano inválido!\n");
-        return 1
-    }
-    printf("%s %d%s, %d\n", months, day, year);
+
+    printf(", %d\n", year);
+
     return 0;
 }
