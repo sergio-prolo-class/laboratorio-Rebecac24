@@ -1,21 +1,33 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-char decompor(
-    float x,
-    int *parte_int,
-    float *parte_frac)
-{
-}
+char decompor(float x, int *parte_int, float *parte_frac);
 
 int main()
 {
-    float numero, *parte_frac;
-    int *parte_int;
+    float x, pf;
+    int pi;
+    char s;
     printf("Entre com número real: ");
-    scanf("%f", &numero);
-    char sinal = decompor(
-        numero, &parte_int, &parte_frac);
-    printf("Sinal: %c\n", sinal);
-    printf("Parte inteira: %d\n", *parte_int)
+    scanf("%f", &x);
+    s = decompor(x, &pi, &pf);
+    printf("Sinal: %c\n", s);
+    printf("Parte inteira: %d\n", pi);
+    printf("Parte fracionada: %g\n", pf);
+    return 0;
+}
+
+char decompor(float x, int *parte_int, float *parte_frac)
+{
+    char sinal;
+    if (x > 0) {
+        sinal = '+';
+    } else if (x < 0) {
+        x = -x;
+        sinal = '-';
+    } else {
+        sinal = ' ';
+    }
+    *parte_int = (int)x;  // casting
+    *parte_frac = x - *parte_int;
+    return sinal;
 }
