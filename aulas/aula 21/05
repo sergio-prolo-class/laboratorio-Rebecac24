@@ -1,0 +1,15 @@
+#include <stdio.h>
+
+int main()
+{
+    float altura;
+    float largura;
+    float profundidade;
+    float area;
+    float volume;
+    printf("Digite a altura (m)");
+    scanf("%f", &altura);
+    printf("Digite a largura (m)");
+    printf("Digite a profundidade (m)");
+    return 0;
+}
