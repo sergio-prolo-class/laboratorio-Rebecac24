@@ -2,25 +2,25 @@
 
 int main()
 {
+    int num_vogais = 0, num_consoantes = 0;
     char caractere;
-    int vogais = 0, consoantes = 0;
 
     printf("Entre com uma frase: ");
-
-    caractere = getchar();
-
+    scanf("%c", &caractere);
     while (caractere != '\n') {
-        if ((caractere >= 'A' && caractere <= 'Z') || (caractere >= 'a' && caractere <= 'z')
-            if (caractere >= 'A' && caractere <= 'Z') {
-            caractere = caractere + 32;
-            if (caractere == 'a' || caractere == 'e' || caractere == 'i' ||
-                caractere == 'o' || caractere == 'u') {
-                vogais++;
-            } else {
-                consoantes++
-            }
+        if ('A' <= caractere && caractere <= 'Z') {
+            caractere -= 'A' - 'a';
+        }
+        if (caractere == 'a' || caractere == 'e' ||
+            caractere == 'i' || caractere == 'o' || caractere == 'u') {
+            num_vogais++;
+        } else if ('a' <= caractere && caractere <= 'z') {
+            num_consoantes++;
+        }
+        scanf("%c", &caractere);
+    }
+    printf("Número de vogais: %d\n", num_vogais);
+    printf("Número de consoantes: %d\n", num_consoantes);
 
-            caractere = getchar();
-    }
     return 0;
-    }
+}
