@@ -7,7 +7,7 @@
 Produto estoque[MAX_PRODUTOS];
 int total_produtos = 0;
 
-// Valida data no formato dd/mm/aaaa
+// valida a data no formato dd/mm/aaaa
 int validar_data(const char *data)
 {
     if (!data || data[2] != '/' || data[5] != '/' || data[10] != '\0')
@@ -45,7 +45,7 @@ int adicionar_produto(int codigo, const char *nome, int quantidade, float preco,
     return 0;
 }
 
-// Atualiza quantidade ou preço do produto
+// Atualiza quantidade ou o preço do produto
 int atualizar_estoque(int opcao, int codigo, int quantidade, float novo_preco)
 {
     int idx = -1;
@@ -78,17 +78,35 @@ int atualizar_estoque(int opcao, int codigo, int quantidade, float novo_preco)
     return -5;
 }
 
-// Verifica produtos vencidos
+// verifica se tem produtos vencidos
 int verificar_validade(char *resultados[], int *total_resultados)
 {
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
-    char data_atual[DATA_TAMANHO];
-    sprintf(data_atual, "%02d/%02d/%04d", tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900);
+    int dia_atual = tm.tm_mday;
+    int mes_atual = tm.tm_mon + 1;
+    int ano_atual = tm.tm_year + 1900;
 
     int count = 0;
     for (int i = 0; i < total_produtos; i++) {
-        if (comparar_strings(estoque[i].data_validade, data_atual) < 0) {
+        // Parse manual da data de validade (dd/mm/aaaa)
+        int dia = (estoque[i].data_validade[0] - '0') * 10 + (estoque[i].data_validade[1] - '0');
+        int mes = (estoque[i].data_validade[3] - '0') * 10 + (estoque[i].data_validade[4] - '0');
+        int ano = (estoque[i].data_validade[6] - '0') * 1000 +
+                  (estoque[i].data_validade[7] - '0') * 100 +
+                  (estoque[i].data_validade[8] - '0') * 10 +
+                  (estoque[i].data_validade[9] - '0');
+
+        // Produto vencido se data de validade < data atual
+        int vencido = 0;
+        if (ano < ano_atual)
+            vencido = 1;
+        else if (ano == ano_atual && mes < mes_atual)
+            vencido = 1;
+        else if (ano == ano_atual && mes == mes_atual && dia < dia_atual)
+            vencido = 1;
+
+        if (vencido) {
             char *buffer = malloc(200);
             sprintf(buffer, "[VENCIDO] Código: %d | Nome: %s | Validade: %s",
                     estoque[i].codigo, estoque[i].nome, estoque[i].data_validade);
@@ -99,7 +117,7 @@ int verificar_validade(char *resultados[], int *total_resultados)
     return count;
 }
 
-// Gera relatório do estoque
+// gera relatorio do estoque
 void gerar_relatorio(char *relatorio)
 {
     relatorio[0] = '\0';
@@ -124,7 +142,7 @@ void gerar_relatorio(char *relatorio)
     concatenar_string(relatorio, temp);
 }
 
-// Busca produto por código ou nome (busca simples, sem string.h)
+// busca produto por código ou nome
 int buscar_produto(int opcao, const char *termo, char *resultados[], int *total_resultados)
 {
     *total_resultados = 0;
@@ -194,7 +212,7 @@ int salvar_estoque()
     return 0;
 }
 
-// Carrega estoque do arquivo texto (parsing manual)
+// Carrega estoque do arquivo texto
 int carregar_estoque()
 {
     FILE *arquivo = fopen("estoque.txt", "r");

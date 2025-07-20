@@ -2,10 +2,10 @@ CC=gcc
 CFLAGS=-Wall -g
 
 # Nome do executável
-TARGET=mercearia
+TARGET=estoque
 
 # Fontes do projeto
-SRCS=mercearia.c estoque_funcoes.c util.c
+SRCS=estoque.c estoque_funcoes.c util.c
 
 # Regra padrão
 all: $(TARGET)

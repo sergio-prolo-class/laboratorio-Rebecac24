@@ -33,7 +33,7 @@ int main()
     carregar_estoque();
     int opcao;
     do {
-        printf("\nSistema de Controle de Estoque:\n"
+        printf("\nSistema de Controle de Estoque de Mercearia:\n"
                "1. Cadastrar novo produto\n2. Ver produtos\n3. Ver validade\n"
                "4. Atualizar estoque\n5. Salvar\n6. Relatório\n7. Buscar\n0. Sair\nEscolha: ");
         if (scanf("%d", &opcao) != 1) {
